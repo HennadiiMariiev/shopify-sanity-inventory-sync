@@ -1,4 +1,4 @@
-### Sanity Inventory Sync App
+# Sanity Inventory Sync App
 
 This is a server application for synchronization of Shopify inventory items (product variants) in locations (warehouses) and Sanity Dataset.
 
