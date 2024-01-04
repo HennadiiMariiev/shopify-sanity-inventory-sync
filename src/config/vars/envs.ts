@@ -1,0 +1,29 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
+const PORT = process.env.PORT ?? 4000;
+
+const SCOPES = process.env.SCOPES;
+const SHOPIFY_API_KEY = process.env.SHOPIFY_API_KEY;
+const SHOPIFY_API_SECRET = process.env.SHOPIFY_API_SECRET;
+
+const SANITY_PROJECT_ID = process.env.SANITY_PROJECT_ID;
+const SANITY_DATASET = process.env.SANITY_DATASET;
+const SANITY_API_TOKEN = process.env.SANITY_API_TOKEN;
+const SANITY_API_VERSION = process.env.SANITY_API_VERSION;
+const SHOPIFY_API_ACCESS_TOKEN = process.env.SHOPIFY_API_ACCESS_TOKEN;
+const SHOPIFY_DOMAIN = process.env.SHOPIFY_DOMAIN;
+
+//SHOPIFY_DOMAIN
+export {
+  PORT,
+  SCOPES,
+  SHOPIFY_API_KEY,
+  SHOPIFY_API_SECRET,
+  SANITY_API_TOKEN,
+  SANITY_API_VERSION,
+  SANITY_DATASET,
+  SANITY_PROJECT_ID,
+  SHOPIFY_API_ACCESS_TOKEN,
+  SHOPIFY_DOMAIN,
+};
