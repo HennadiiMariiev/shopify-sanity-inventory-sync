@@ -38,7 +38,7 @@ mutation {
     bulkOperationRunQuery(
       query:"""
       {
-        locations(first: 50) {
+        locations {
           edges {
             node {
               id
@@ -46,7 +46,7 @@ mutation {
               address {
                 countryCode
               }
-              inventoryLevels(first:250) {
+              inventoryLevels {
                 edges {
                   node {
                     id

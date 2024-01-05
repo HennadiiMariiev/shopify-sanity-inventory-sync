@@ -78,8 +78,6 @@ async function main() {
         return;
       }
 
-      console.log('locationsResult', locationsResult);
-
       const sanityLocationsData: TSanityLocation[] =
         await sanityService.getLocations();
 
