@@ -1,13 +1,13 @@
 import path from 'path';
 
-import sanityService from '../src/services/sanity.service';
-import { getDataFromFile } from '../src/utils/getDataFromFile';
+import sanityService from '../services/sanity.service';
+import { getDataFromFile } from '../utils/getDataFromFile';
 import {
   TSanityLocation,
   TSanityPatchLocationObj,
   TVariantWithLocations,
-} from '../src/typescript/types';
-import { mapSanityVariants } from '../src/utils/mapSanityVariants';
+} from '../typescript/types';
+import { mapSanityVariants } from '../utils/mapSanityVariants';
 
 const filePath = path.resolve(__dirname, 'data', 'data.jsonl');
 

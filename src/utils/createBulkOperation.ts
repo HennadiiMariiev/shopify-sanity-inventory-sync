@@ -19,7 +19,7 @@ export async function createBulkOperation(client: GraphqlClient) {
 
     return bulkOperationId;
   } catch (error) {
-    console.log(error);
+    console.log('createBulkOperation error: ', error);
     return null;
   }
 }

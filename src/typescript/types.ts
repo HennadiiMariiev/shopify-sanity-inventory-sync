@@ -49,7 +49,7 @@ export type TBulkOperationRunResponse = {
 
 export type TBulkOperationResultResponse = {
   data: {
-    node: {
+    currentBulkOperation: {
       url: string;
     };
   };
@@ -93,13 +93,4 @@ export type TSanityPatchLocationObj = {
   };
   quantity: number;
   _type: string;
-};
-
-export type TSanityPatchLocationObj1 = {
-  // name: {
-  _ref: string;
-  _type: string;
-  // };
-  // quantity: number;
-  // _type: string;
 };

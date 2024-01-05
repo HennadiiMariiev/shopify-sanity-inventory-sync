@@ -1,12 +1,9 @@
 import path from 'path';
 
-import sanityService from '../src/services/sanity.service';
-import { getDataFromFile } from '../src/utils/getDataFromFile';
-import {
-  TSanityLocation,
-  TVariantWithLocations,
-} from '../src/typescript/types';
-import { mapSanityVariants } from '../src/utils/mapSanityVariants';
+import sanityService from '../services/sanity.service';
+import { getDataFromFile } from '../utils/getDataFromFile';
+import { TSanityLocation, TVariantWithLocations } from '../typescript/types';
+import { mapSanityVariants } from '../utils/mapSanityVariants';
 
 const filePath = path.resolve(__dirname, 'data', 'data.jsonl');
 
@@ -22,7 +19,7 @@ async function main() {
       );
 
       for (const item of preparedSanityVariantsArr) {
-        const res = await sanityService.init_clearSingleVariantWithLocations(
+        const res = await sanityService.init_deleteSingleVariantLocations(
           item.variantId
         );
 

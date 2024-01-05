@@ -79,14 +79,16 @@ mutation {
 `;
 
 const bulkOperationResultQuery = `
-query($id: ID!) {
-  node(id: $id) {
-    ... on BulkOperation {
-      url
-      partialDataUrl
-    }
+  query {   
+    currentBulkOperation {     
+      id     
+      status     
+      errorCode                    
+      fileSize     
+      url   
+    } 
   }
-}`;
+`;
 
 export {
   getLocations,

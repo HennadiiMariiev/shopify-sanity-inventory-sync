@@ -1,6 +1,9 @@
 import sanityClient from '../config/sanity';
 import { TLocations, TSanityPatchLocationObj } from '../typescript/types';
 
+type TError = {
+  message: string;
+};
 class SanityService {
   async getProducts() {
     try {
@@ -10,7 +13,7 @@ class SanityService {
 
       return products;
     } catch (error) {
-      console.log(error);
+      console.log('sanityService.getProducts error: ', error);
       return [];
     }
   }
@@ -21,7 +24,7 @@ class SanityService {
 
       return variants;
     } catch (error) {
-      console.log(error);
+      console.log('sanityService.getProductVariants error: ', error);
       return [];
     }
   }
@@ -30,7 +33,7 @@ class SanityService {
     try {
       return await sanityClient.fetch(`*[_type == "location"]`);
     } catch (error) {
-      console.log(error);
+      console.log('sanityService.getLocations error: ', error);
       return [];
     }
   }
@@ -50,7 +53,32 @@ class SanityService {
 
       return res;
     } catch (error) {
-      console.log(error);
+      console.log(
+        'sanityService.init_updateSingleVariantWithLocations error: ',
+        (error as TError)?.message
+      );
+      return null;
+    }
+  }
+
+  async init_deleteSingleVariantLocations(_id: string) {
+    try {
+      const res = await sanityClient
+        .patch(_id)
+        .setIfMissing({
+          locations: [],
+        })
+        .set({
+          locations: [],
+        })
+        .commit();
+
+      return res;
+    } catch (error) {
+      console.log(
+        'sanityService.init_deleteSingleVariantLocations error: ',
+        error
+      );
       return null;
     }
   }
@@ -58,7 +86,7 @@ class SanityService {
   async init_createLocations(locationsArr: TLocations[]) {
     try {
       const result = [];
-      
+
       for (const location of locationsArr) {
         const res = await sanityClient.create({
           ...location,
@@ -72,25 +100,31 @@ class SanityService {
 
       return result;
     } catch (error) {
-      console.log(error);
+      console.log('sanityService.init_createLocations error: ', error);
       return [];
     }
   }
 
-  async init_clearSingleVariantWithLocations(_id: string) {
+  async init_deleteLocations() {
     try {
-      const res = await sanityClient
-        .patch(_id)
-        .setIfMissing({
-          locations: [],
-        })
-        .set({ locations: [] })
-        .commit();
+      const variants = await sanityClient.fetch(`*[_type == "productVariant"] {
+        _id
+      }`);
+
+      for (const variant of variants) {
+        if (variant?._id) {
+          await this.init_deleteSingleVariantLocations(variant?._id);
+        }
+      }
+
+      const res = await sanityClient.delete({
+        query: `*[_type == "location"]`,
+      });
 
       return res;
     } catch (error) {
-      console.log(error);
-      return null;
+      console.log('sanityService.init_deleteLocations error: ', error);
+      return [];
     }
   }
 }
